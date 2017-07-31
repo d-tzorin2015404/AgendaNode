@@ -1,0 +1,77 @@
+
+<% include layout %>
+<head>
+  <title>Entrega Bootstrap</title>
+  <meta charset="UTF-8">
+
+
+
+  <script type="text/javascript" src="javascripts/zepto.min.js"></script>
+ </head>
+
+
+<div class="row">
+  <div class="page-header">
+    <h1>Tareas</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de Tareas</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: tareas">
+        <tr>
+          <td data-bind="text: nombre"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#modalCategoria">
+        Agregar
+    </button>
+    <div class="container">
+
+  <section id="contenido">
+  	<div class="table">
+  		<h2>Tiempo de Tarea</h2>
+  		<h2><span id="crono">0.0</span><br>
+  		<button type ="button" class="btn btn-success" id="cambiar">Iniciar-Pausa</button>
+  		<button type ="button" class="btn btn-danger" id="inicializar">Reiniciar</button>
+  	</div>
+  </section>
+  </div>
+
+
+    <div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/categorias" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<% include footer %>
+<script src="/javascripts/categoriaCliente.js"></script>
+<script src="/javascripts/cronometro.js"></script>

@@ -1,0 +1,167 @@
+<% include layout %>
+<div class="row">
+  <div class="page-header">
+    <h1>Contacto</h1>
+    
+    <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#modalEventoNuevo">
+        Agregar
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de contactos</h2>
+   
+   <!-- <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Apellido</th>
+          <th>Nombre</th>
+          <th>Direccion</th>
+          <th>Telefono</th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: contactos">
+        <tr>
+          <td data-bind="text: idContacto"></td>
+          <td data-bind="text: apellido"></td>
+          <td data-bind="text: nombre"></td>
+          <td data-bind="text: direccion"></td>
+          <td data-bind="text: telefono"></td>
+        </tr>
+      </tbody>
+    </table>
+-->
+
+<div class="container-fluid" >
+    <div class="row" data-bind="foreach: contactos">
+        <div class="col-xs-4">
+            <div class="card text-xs-center">
+                <div class="card-block" >
+                    <h3 class="card-title" data-bind="text:nombre"></h3>
+                        <p class="card-text"  data-bind="text: direccion"></p>
+                        <p class="card-text"  data-bind="text: telefono"></p>
+                        <a href="#" class="btn btn-primary" >Editar</a>
+                        <a href="#" class="btn btn-danger" >Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Modal Agregar Contacto -->
+    <div class="modal fade" id="modalEventoNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/api/contacto" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+                    </div>
+                    <div class="modal-body">
+                              
+                        <div class="form-group">
+                            <label for="idUsuario">Usuario</label>
+                            <input type="text" class="form-control" name="idUsuario" id="idUsuario"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" class="form-control" name="direccion" id="direccion" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" class="form-control" name="telefono" id="telefono" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="idCategoria">Categoria</label>
+                            <input type="text" class="form-control" name="idCategoria" id="idCategoria" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+     <div class="modal fade" id="modalEditarPrioridad" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" data-bind="if:/prioridades">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form data-bind="submit: editar">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Editar Evento</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="inputId">Id</label>
+                                <input type="text" class="form-control" name="inputId" id="inputId"
+                                       data-bind="value: eventoCargado().idEvento" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inputNombre">Nombre</label>
+                                <input type="text" class="form-control" name="inputNombre" id="inputNombre"
+                                       data-bind="value: eventoCargado().nombre" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inputFecha">Fecha</label>
+                                <input type="text" class="form-control" name="inputFecha" id="inputFecha"
+                                       data-bind="value: eventoCargado().fecha" />
+                            </div>
+                            <div class="form-group">
+                                <label for="selectCategoria">Tipo</label>
+                                <select class="form-control"
+                                        data-bind="options: tipos, optionsText: 'nombre', value: eventoCargado().tipoEvento"></select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="selectCategoria">Tipo</label>
+                                <select class="form-control"
+                                        data-bind="options: usuarios, optionsText: 'nombre', value: eventoCargado().usuario"></select>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        
+  </div>
+</div>
+<% include footer %>
+<script src="/javascripts/contactoCliente.js"></script>
